@@ -1,2 +1,2 @@
-# DAK
-Deep annotation of kinetoplastid proteins
+# DARK
+*Deep annotation of representatives kinetoplastid proteins*
