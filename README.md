@@ -22,7 +22,7 @@ cd DARK
 ```
 apt-get install python3-venv   --- (only if needed)
 
-python3 -m venv vdark
+python -m venv vdark
 
 source vdark/bin/activate
 ````
@@ -37,14 +37,14 @@ source vdark/bin/activate
 Once python and visual sutdio are installed:
 
 ```
-python3 -m venv vdark
+python -m venv vdark
 
 vdark/Scripts/activate 
 ````
 If the previous line has an error please run:
 
 ```
-vidminer/Scripts/activate.bat 
+vdark/Scripts/activate.bat 
 
 ```
 
@@ -68,4 +68,4 @@ http://127.0.0.1:8050/
 ````
 
 
-**We hope that IDMiner will be useful for your research!** :v::v::v::v:
+**We hope that DARK will be useful for your research!** :v::v::v::v:
