@@ -1,0 +1,65 @@
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+.logo{
+    height: 125px;
+    right: 0px;
+    padding-left: 10px;
+    padding-top: 6px;
+    padding-bottom: 5px;
+}
+
+.menudropdown{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.about_text{
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.about_header{
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.entry_tabs{
+    display: block;
+    font-size: large;
+    padding-right: 0px;
+    margin-top: -22px;
+    padding-top: 0px;
+    width: 100%;
+    height: 42px;
+}
+
+
+.gene_table{
+    padding-top: 25px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+
+.gene_individual_table{
+    margin-top: 0px;
+    font-size: 14px;
+    margin-bottom: 300px;
+}
+
+.h6_gene_individual_table{
+    background-color: rgb(21, 45, 66);
+    height: 22px
+}
+
+.radio_btn_option{
+    display:inline-grid;
+}
