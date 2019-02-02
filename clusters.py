@@ -150,7 +150,7 @@ info_dropdown = html.Div([
 
 
 layout = html.Div([
-    header.layout,
+    header.layout_cluster,
     generate_cluster_dash_table(dfgeneral),
     html.Div(children=[cluster_dropdown,info_dropdown],className=" four columns",style={"display":"flex","margin-bottom": "50px","margin-left":"2%"}),
     html.Div(id='cluster-table')

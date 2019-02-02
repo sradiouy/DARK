@@ -120,7 +120,7 @@ extrainfo_table = generate_dash_table(dfextra)
 
 layout= html.Div(
     children=[
-    header.layout,
+    header.layout_genes,
     keyinfo_table,
     html.Div(children=[org_dropdown,gene_dropdown],className=" four columns",style={"display":"flex","margin-bottom": "50px","margin-left":"2%"}),
     html.Div(id='gene-table')

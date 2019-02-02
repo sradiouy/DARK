@@ -188,7 +188,7 @@ words_dropdown = html.Div([
 
 
 layout = html.Div([
-    header.layout,
+    header.layout_functions,
     words_dropdown,
     html.Div(id='search-table')
     ])
