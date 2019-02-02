@@ -179,7 +179,6 @@ def update_date_dropdown(organism):
     dash.dependencies.Output('gene-table', 'children'),
     [dash.dependencies.Input('query-gene-dropdown', 'value')])
 def set_display_children(selected_value):
-    print(selected_value)
     if selected_value is not None:
         labels = dfextra[dfextra["ID"]==selected_value].columns.tolist()
         values = dfextra[dfextra["ID"]==selected_value].fillna("-").values.tolist()[0]

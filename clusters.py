@@ -3,7 +3,7 @@ import pandas as pd
 import header
 from collections import defaultdict
 from genes import generate_dash_table, dfkey, dfextra, make_dash_pretty_table
-
+import string
 
 import dash
 import dash_table
@@ -56,6 +56,7 @@ def generate_cluster_dash_table(dataframe):
 )
 
 
+
 def generate_pubmed_dash_table(dataframe):
     return html.Div([
     html.H6([""], className="h6_gene_individual_table gs-header gs-table-header padded"),
@@ -83,6 +84,7 @@ def generate_pubmed_dash_table(dataframe):
     )
     ],className="twelve columns gene_table"
 )
+
 
 
 file_cluster = "data/cluster_info.tsv"
@@ -124,8 +126,7 @@ cluster_dropdown = html.Div([
                     {'label': i, 'value': i} for i in set(dfgeneral["CLUSTER"])
                 ],
                 multi=False,
-                searchable=True,
-                value=dfgeneral["CLUSTER"].iloc[0] #Start query value
+                searchable=True
             )
         ],style={"margin-right":"100px","width": "400px"}
     )]
@@ -167,7 +168,6 @@ def update_graph(pagination_settings, sorting_settings, filtering_settings):
         if ' eq ' in filter:
             col_name = filter.split(' eq ')[0]
             filter_value = filter.split(' eq ')[1]
-            print(col_name,filter_value)
             if col_name == "CLUSTER":
                 dff = dff.loc[dff[col_name] == int(filter_value)]
             else:
@@ -198,49 +198,6 @@ def update_graph(pagination_settings, sorting_settings, filtering_settings):
     ].to_dict('rows')
 
 
-# @app.callback(
-#     Output('pubmed-sorting-filtering', 'data'),
-#     [Input('pubmed-sorting-filtering', 'pagination_settings'),
-#      Input('pubmed-sorting-filtering', 'sorting_settings'),
-#      Input('pubmed-sorting-filtering', 'filtering_settings')])
-# def update_graph(pagination_settings, sorting_settings, filtering_settings):
-#     filtering_expressions = filtering_settings.split(' && ')
-#     dff = df_individual_pubmed
-#     for filter in filtering_expressions:
-#         if ' eq ' in filter:
-#             col_name = filter.split(' eq ')[0]
-#             filter_value = filter.split(' eq ')[1]
-#             print(col_name,filter_value)
-#             if col_name == "CLUSTER":
-#                 dff = dff.loc[dff[col_name] == int(filter_value)]
-#             else:
-#                 dff = dff.loc[dff[col_name] == filter_value]
-#         if ' > ' in filter:
-#             col_name = filter.split(' > ')[0]
-#             filter_value = float(filter.split(' > ')[1])
-#             dff = dff.loc[dff[col_name] > filter_value]
-#         if ' < ' in filter:
-#             col_name = filter.split(' < ')[0]
-#             filter_value = float(filter.split(' < ')[1])
-#             dff = dff.loc[dff[col_name] < filter_value]
-
-#     if len(sorting_settings):
-#         dff = dff.sort_values(
-#             [col['column_id'] for col in sorting_settings],
-#             ascending=[
-#                 col['direction'] == 'asc'
-#                 for col in sorting_settings
-#             ],
-#             inplace=False
-#         )
-
-#     return dff.iloc[
-#         pagination_settings['current_page']*pagination_settings['page_size']:
-#         (pagination_settings['current_page'] + 1) *
-#         pagination_settings['page_size']
-#     ].to_dict('rows')
-
-
 @app.callback(
     dash.dependencies.Output('cluster-table', 'children'),
     [dash.dependencies.Input('query-cluster-dropdown', 'value'),
@@ -249,6 +206,7 @@ def set_display_children(selected_value,selected_option):
     labels = []
     values = []
     if selected_value is not None and selected_option is not None and selected_option != "":
+        print(selected_value,selected_option)
         if selected_option == "PRODUCT":
             labels = dfkey[dfkey["CLUSTER"]==selected_value].ID.tolist()
             values = dfkey[dfkey["CLUSTER"]==selected_value].fillna("-").PRODUCT.tolist()
@@ -305,3 +263,5 @@ def set_display_children(selected_value,selected_option):
                             ),
                     html.Table(make_dash_pretty_table(dfcluster_species),className="gene_individual_table")
                 ], className="twelve columns about_text")
+    else:
+        return html.Div()

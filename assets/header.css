@@ -63,3 +63,18 @@ html,body
 .radio_btn_option{
     display:inline-grid;
 }
+
+#term-dropdown-container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0% 25% 5% 25%;
+}
+
+#term-dropdown{
+    width: 67%;
+}
+
+#union-intersection-dropdown{
+    flex: 1;
+    padding-left: 15px;
+} 
