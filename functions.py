@@ -152,41 +152,6 @@ words_dropdown = html.Div([
 )
 
 
-# cluster_search_dropdown = html.Div([
-#     html.Hr(),
-#     html.Div([dcc.Markdown('''### Cluster''')],style={"margin-bottom": "30px","margin-left": "30%"}),
-#     html.Div(
-#         children=[
-#             dcc.Dropdown(
-#                 id='query-search-cluster-dropdown',
-#                 options=[
-#                     {'label': i, 'value': i} for i in set(df_search["CLUSTER"])
-#                 ],
-#                 multi=False,
-#                 searchable=True
-#             )
-#         ],style={"margin-right":"100px","width": "400px"}
-#     )]
-# )
-
-
-
-# info_search_dropdown = html.Div([
-#     html.Hr(),
-#     html.Div([dcc.Markdown('''### Information''')],style={"margin-bottom": "30px","margin-left": "30%"}),
-#     html.Div(
-#     children=[
-#     dcc.Dropdown(
-#         id='options-search-dropdown',
-#         options=[{'label': k, 'value': k} for k in ["ORGANISM","ANNOTATION","PUBLICATIONS","PRODUCT","COMMENTS",'EC NUMBER','TIGRRFAM','SUPERFAMILY','SMART','PROSITE','PIRSF','PFAM','INTERPRO','TM COUNT','SIGNAL P']],
-#         value=dfextra.columns[1]
-#     ),
-#     ],style={"width": "236px"},
-#     )
-#     ]
-# )
-
-
 layout = html.Div([
     header.layout_functions,
     words_dropdown,
