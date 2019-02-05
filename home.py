@@ -220,7 +220,7 @@ def make_taxa_plot(taxa):
                 'layout': go.Layout(
                     title="Cluster Size Distribution",
                     xaxis={'title': 'Cluster Size'},
-                    yaxis={'title': '% Of Total Clusters'},
+                    yaxis={'title': 'Number of Clusters'},
                     #margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
                     legend={'x': 0, 'y': 1},
                 )
