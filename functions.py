@@ -2,7 +2,7 @@ from app import app
 import pandas as pd 
 import header
 from collections import defaultdict
-from clusters import dfgeneral, dfhhblits, generate_pubmed_dash_table, generate_pubmed_sub_dataframe, dfpubmed, dfspecies
+from clusters import dfgeneral, dfhhblits, generate_pubmed_dash_table, generate_pubmed_sub_dataframe, dfpubmed, dfspecies,dfgo,generate_go_dash_table,generate_go_sub_dataframe
 from genes import make_dash_pretty_table, dfextra, dfkey
 
 import dash
@@ -275,6 +275,9 @@ def set_display_children(selected_value,selected_option):
         elif selected_option == "PUBLICATIONS":
             df_individual_pubmed = generate_pubmed_sub_dataframe(selected_value)
             return generate_pubmed_dash_table(df_individual_pubmed)
+        elif selected_option == "GO":
+            df_individual_go = generate_go_sub_dataframe(selected_value)
+            return generate_go_dash_table(df_individual_go)
         dfcluster_species = pd.DataFrame({"label":labels,"value":values})
         return html.Div([
                     html.H6([""],

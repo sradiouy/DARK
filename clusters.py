@@ -20,6 +20,14 @@ def generate_pubmed_sub_dataframe(cluster):
     return df
 
 
+
+def generate_go_sub_dataframe(cluster):
+    list_results = dfgo[dfgo["Cluster"] == cluster].values.tolist()
+    if list_results == []:
+        list_results = [[cluster] + ["-"]*3]
+    df = pd.DataFrame(list_results,columns=["Cluster","Type","GO","Info"])
+    return df 
+
 def generate_cluster_dash_table(dataframe):
     return html.Div([dash_table.DataTable(
     id='cluster-sorting-filtering',
@@ -86,6 +94,36 @@ def generate_pubmed_dash_table(dataframe):
 )
 
 
+def generate_go_dash_table(dataframe):
+    return html.Div([
+    html.H6([""], className="h6_gene_individual_table gs-header gs-table-header padded"),
+    dash_table.DataTable(
+    id='go-sorting-filtering',
+    columns=[{"name": i, "id": i} for i in dataframe.columns],
+    data=dataframe.to_dict("rows"),
+    style_table={'overflowX': 'scroll'},
+    style_header={
+        'backgroundColor': 'rgb(21, 45, 66)',
+        'color':'white',
+        'font-family': 'Dosis',
+        'textAlign': 'center',
+        'font-size': '18'
+    },
+    style_cell={
+        'backgroundColor': '#FAFAFA',
+        'minWidth': '0px', 'maxWidth': '300px',
+        'whiteSpace': 'no-wrap',
+        'overflow': 'scroll',
+        'textAlign': 'center',
+        'padding': '5px',
+        'font-size': '15'
+    },
+    editable=True
+    )
+    ],className="twelve columns gene_table"
+)
+
+
 
 file_cluster = "data/cluster_info.tsv"
 
@@ -114,6 +152,9 @@ pubmed_file ="data/pubmed_cluster.tsv"
 dfpubmed = pd.read_table(pubmed_file,sep="\t",header=None,names=["Cluster","Id","Title","Journal","Year"])
 
 
+go_file = "data/GO_information_by_cluster.tsv"
+
+dfgo = pd.read_table(go_file,sep="\t",header=0, dtype={"Cluster":"int64","GO":"str","Type":"str","Info":"str"})
 
 cluster_dropdown = html.Div([
     html.Hr(),
@@ -141,7 +182,7 @@ info_dropdown = html.Div([
     children=[
     dcc.Dropdown(
         id='options-dropdown',
-        options=[{'label': k, 'value': k} for k in ["ORGANISM","ANNOTATION","PUBLICATIONS","PRODUCT","COMMENTS",'EC NUMBER','TIGRRFAM','SUPERFAMILY','SMART','PROSITE','PIRSF','PFAM','INTERPRO','TM COUNT','SIGNAL P']],
+        options=[{'label': k, 'value': k} for k in ["ORGANISM","ANNOTATION","PUBLICATIONS","GO","PRODUCT","COMMENTS",'EC NUMBER','TIGRRFAM','SUPERFAMILY','SMART','PROSITE','PIRSF','PFAM','INTERPRO','TM COUNT','SIGNAL P']],
         value=dfextra.columns[1]
     ),
     ],style={"width": "236px"},
@@ -206,7 +247,6 @@ def set_display_children(selected_value,selected_option):
     labels = []
     values = []
     if selected_value is not None and selected_option is not None and selected_option != "":
-        print(selected_value,selected_option)
         if selected_option == "PRODUCT":
             labels = dfkey[dfkey["CLUSTER"]==selected_value].ID.tolist()
             values = dfkey[dfkey["CLUSTER"]==selected_value].fillna("-").PRODUCT.tolist()
@@ -256,6 +296,9 @@ def set_display_children(selected_value,selected_option):
         elif selected_option == "PUBLICATIONS":
             df_individual_pubmed = generate_pubmed_sub_dataframe(selected_value)
             return generate_pubmed_dash_table(df_individual_pubmed)
+        elif selected_option == "GO":
+            df_individual_go = generate_go_sub_dataframe(selected_value)
+            return generate_go_dash_table(df_individual_go)
         dfcluster_species = pd.DataFrame({"label":labels,"value":values})
         return html.Div([
                     html.H6([""],
