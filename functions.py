@@ -12,8 +12,8 @@ import dash_core_components as dcc
 import dash_html_components as html
 
 
-def RiteshKumar(l):#FIND DUPLICATED ITEMS IN LIST
-    return list(set([x for x in l if l.count(x) > 1]))
+def RiteshKumar(l,selected_dropdown_value):#FIND DUPLICATED ITEMS IN LIST
+    return list(set([x for x in l if l.count(x) == len(selected_dropdown_value)]))
 
 
 
@@ -29,7 +29,7 @@ def get_cluster_by_words(selected_dropdown_value,dfwords,union_intersection):
     elif union_intersection == "INTERSECTION":
         for word in selected_dropdown_value:
             clusters += dfwords[dfwords["Word"] == word].Cluster.values[0].split(",")
-        return list(set(RiteshKumar(clusters)))
+        return list(set(RiteshKumar(clusters,selected_dropdown_value)))
     
 
 
@@ -91,7 +91,7 @@ def generate_search_dash_table(nclust,dataframe):
     children=[
     dcc.Dropdown(
         id='options-search-dropdown',
-        options=[{'label': k, 'value': k} for k in ["ORGANISM","ANNOTATION","PUBLICATIONS","PRODUCT","COMMENTS",'EC NUMBER','TIGRRFAM','SUPERFAMILY','SMART','PROSITE','PIRSF','PFAM','INTERPRO','TM COUNT','SIGNAL P']],
+        options=[{'label': k, 'value': k} for k in ["ORGANISM","ANNOTATION","PUBLICATIONS","GO","PRODUCT","COMMENTS",'EC NUMBER','TIGRRFAM','SUPERFAMILY','SMART','PROSITE','PIRSF','PFAM','INTERPRO','TM COUNT','SIGNAL P']],
         value=dfextra.columns[1]
     ),
     ],style={"width": "236px"},

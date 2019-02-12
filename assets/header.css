@@ -1,6 +1,6 @@
 html,body
 {
-    width: 100%;
+    width: 99%;
     height: 100%;
     margin: 0px;
     padding: 0px;
@@ -70,6 +70,18 @@ html,body
     margin: 0% 25% 5% 25%;
 }
 
+#list-genes-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.area-text{
+    background-color: whitesmoke;
+    border: thin solid rgb(0, 0, 0);
+    height: 200px;
+}
+
 #term-dropdown{
     width: 67%;
 }
@@ -127,3 +139,27 @@ html,body
     /* border-width: thick; */
     /* border-color: black; */
 }
+
+
+
+._dash-loading-callback {
+    margin: auto;
+    border: 16px solid black;
+    border-radius: 50%;
+    border-top: 16px solid darkred;
+    width: 120px;
+    height: 200px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+  }
+  
+  /* Safari */
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

@@ -134,6 +134,21 @@ dfgeneral = df[['Cluster', 'Size', 'Trypanosoma', 'Leishmaniinae', 'Blechomonas'
 
 dfgeneral.columns = ['CLUSTER','SIZE','TRYPANOSOMA','LEISHMANIINAE','BLECHOMONAS','PARATRYPANOSOMA']
 
+file_annotation_summary = "data/Cluster_Annotation_summary.tsv"
+
+dfannot_summary = pd.read_table(file_annotation_summary,sep="\t",header=0)
+
+dfannot_summary = dfannot_summary[["cluster","full"]]
+dfannot_summary.columns = ["CLUSTER","ANNOTATED"]
+
+dfannot_summary["ANNOTATED"] = dfannot_summary["ANNOTATED"].replace(1,"YES")
+dfannot_summary["ANNOTATED"] = dfannot_summary["ANNOTATED"].replace(0,"NO")
+
+
+dfgeneral = dfgeneral.merge(dfannot_summary,on="CLUSTER",how="left")
+
+dfgeneral = dfgeneral.fillna("NOT COMPUTED")
+
 species = ['Cluster', 'Size', 'Trypanosoma', 'Leishmaniinae', 'Blechomonas','Paratrypanosoma','Trypanosoma_vivax', 'Trypanosoma_cruzi','Trypanosoma_congolense', 'Trypanosoma_brucei', 'Trypanosoma_rangeli','Trypanosoma_theileri', 'Trypanosoma_evansi', 'Trypanosoma_grayi','Leishmania_aethiopica', 'Leishmania_tropica', 'Leishmania_panamensis','Leishmania_braziliensis', 'Leishmania_sp', 'Leishmania_major','Leishmania_infantum', 'Leishmania_mexicana', 'Leishmania_donovani','Leishmania_amazonensis', 'Leishmania_arabica', 'Leishmania_enriettii','Leishmania_gerbilli', 'Leishmania_tarentolae', 'Leishmania_turanica','Crithidia_fasciculata', 'Endotrypanum_monterogeii','Leptomonas_pyrrhocoris', 'Leptomonas_seymouri','Paratrypanosoma_confusum', 'Blechomonas_ayalai']
 
 dfspecies = df[species]
@@ -167,7 +182,8 @@ cluster_dropdown = html.Div([
                     {'label': i, 'value': i} for i in set(dfgeneral["CLUSTER"])
                 ],
                 multi=False,
-                searchable=True
+                searchable=True,
+                value=5,
             )
         ],style={"margin-right":"100px","width": "400px"}
     )]

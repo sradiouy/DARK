@@ -8,6 +8,7 @@ import genes
 import clusters
 import functions
 import home
+import gene_list
 
 #####
 
@@ -31,6 +32,8 @@ def display_page(pathname):
         return clusters.layout
     elif pathname == '/functions':
         return functions.layout
+    elif pathname == '/gene_list':
+        return gene_list.layout
     else:
         return 'The page does not exist: 404 Error'
 
