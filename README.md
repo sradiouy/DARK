@@ -58,7 +58,7 @@ pip install -r requirements.txt
 ### 5. Run the application
 
 ```
-python vdark.py
+python dark.py
 ```
 
 ### 6. Point to localhost in any web browser
