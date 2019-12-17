@@ -34,7 +34,7 @@ pip3 install virtualenv   --- (only if needed)
 
 python3 -m venv vdark
 
-source vidminer/bin/activate
+source vdark/bin/activate
 
 If you have ntlk certificate problem please go to Macintosh HD > Applications > Python3.x folder 
 (or whatever version of pyth
