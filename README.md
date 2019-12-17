@@ -72,6 +72,10 @@ pip install -r requirements.txt
 
 ```
 python dark.py
+
+- If you have a pandas importation error please run: pip install --upgrade pandas --force
+
+inside de vdark env
 ```
 
 ### 6. Point to localhost in any web browser
