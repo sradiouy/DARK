@@ -32,7 +32,7 @@ source vdark/bin/activate
 ```
 pip3 install virtualenv   --- (only if needed)
 
-python3 -m venv vidminer
+python3 -m venv vdark
 
 source vidminer/bin/activate
 
