@@ -17,7 +17,7 @@ cd DARK
 ### 3. Create and activate a python (3.6 or higher) virtual environment  
 
 
-#### 3.1 On Mac or Linux
+#### 3.1 On Linux
 
 ```
 apt-get install python3-venv   --- (only if needed)
@@ -27,7 +27,20 @@ python -m venv vdark
 source vdark/bin/activate
 ````
 
-#### 3.2 On Windows 
+#### 3.2 On Mac
+
+```
+pip3 install virtualenv   --- (only if needed)
+
+python3 -m venv vidminer
+
+source vidminer/bin/activate
+
+If you have ntlk certificate problem please go to Macintosh HD > Applications > Python3.x folder 
+(or whatever version of pyth
+````
+
+#### 3.3 On Windows 
  
  If it is your first time with python app, we recommend the following: 
   
