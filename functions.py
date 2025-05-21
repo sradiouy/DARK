@@ -6,10 +6,10 @@ from clusters import dfgeneral, dfhhblits, generate_pubmed_dash_table, generate_
 from genes import make_dash_pretty_table, dfextra, dfkey
 
 import dash
-import dash_table
+from dash import dash_table
 from dash.dependencies import Input, Output, State
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 
 def RiteshKumar(l,selected_dropdown_value):#FIND DUPLICATED ITEMS IN LIST

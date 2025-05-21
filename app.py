@@ -8,7 +8,7 @@ from flask import Flask, send_from_directory
 server = Flask(__name__)
 
 app = dash.Dash(__name__,server=server)
-app.config.supress_callback_exceptions = True
+app.config.suppress_callback_exceptions = True
 
 
 # Add bootstrap css

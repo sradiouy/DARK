@@ -6,10 +6,10 @@ from genes import generate_dash_table, dfkey, dfextra, make_dash_pretty_table
 import string
 
 import dash
-import dash_table
+from dash import dash_table
 from dash.dependencies import Input, Output, State
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 
 
 def generate_pubmed_sub_dataframe(cluster):

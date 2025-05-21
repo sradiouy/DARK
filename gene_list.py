@@ -1,9 +1,9 @@
 # coding=utf-8
 import dash
-import dash_table
+from dash import dash_table
 import dash_bootstrap_components as dbc
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc
+from dash import html
 from dash.dependencies import Input, Output, State
 
 import pandas as pd
@@ -56,19 +56,19 @@ def on_click(number_of_times_button_has_clicked,gene_list_value):
             basename = "dark_" + now.strftime("%Y-%m-%d-%H-%M")
             if not os.path.exists("DARK_RESULTS"):
                 os.makedirs("DARK_RESULTS")
-            output_path = os.getcwd() + "/DARK_RESULTS/"
+            output_path = os.path.join(os.getcwd(), "DARK_RESULTS")
             genes = gene_list_value
-            gene_file = os.path.dirname(os.path.abspath(__file__)) + "/data/gene_info.tsv"
+            gene_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "gene_info.tsv")
             df_gene_info = pd.read_table(gene_file,sep="\t",header=0)
             df_gene_info = df_gene_info[df_gene_info['primary_key'].isin(genes)].fillna("-")
-            genes_info = output_path + basename + "_info.tsv"
+            genes_info = os.path.join(output_path, basename + "_info.tsv")
             df_gene_info.to_csv(genes_info,sep="\t",header=True,index=False)
-            gene_not_analyzed = output_path + basename + "_not_analyzed.txt"
+            gene_not_analyzed = os.path.join(output_path, basename + "_not_analyzed.txt")
             with open(gene_not_analyzed,"w") as fo:
                 for x in genes:
                     if x not in df_gene_info['primary_key'].tolist():
                         fo.write(x+"\n")
-            file_cluster = os.path.dirname(os.path.abspath(__file__)) + "/data/cluster_info.tsv"
+            file_cluster = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cluster_info.tsv")
             df_cluster = pd.read_table(file_cluster,sep="\t",header=0)
             df_cluster = df_cluster[['Cluster', 'Size', 'Trypanosoma', 'Leishmaniinae', 'Blechomonas','Paratrypanosoma']]
             df_cluster.columns = ['CLUSTER','SIZE','TRYPANOSOMA','LEISHMANIINAE','BLECHOMONAS','PARATRYPANOSOMA']
@@ -76,25 +76,25 @@ def on_click(number_of_times_button_has_clicked,gene_list_value):
             tmp = df_gene_info[["primary_key","cluster",'gene_product']]
             tmp.columns = ["ID","CLUSTER","FUNCTION"]
             df_cluster = tmp.merge(df_cluster,on="CLUSTER")
-            file_annot = os.path.dirname(os.path.abspath(__file__)) + "/data/cluster_annotations.tsv"
+            file_annot = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "cluster_annotations.tsv")
             dfhhblits = pd.read_csv(file_annot,sep="\t",header=0)
             dfhhblits.columns = ['CLUSTER', 'HMM L', 'PDB70 (1)', 'PDB70 (2)', 'PDB70 (3)', 'PFAM_A (1)', 'PFAM_A (2)', 'PFAM_A (3)', 'SCOP70 (1)', 'SCOP70 (2)', 'SCOP70 (3)', 'UNICLUST30 (1)', 'UNICLUST30 (2)', 'UNICLUST30 (3)']
             dfhhblits = dfhhblits[['CLUSTER','UNICLUST30 (1)', 'UNICLUST30 (2)', 'UNICLUST30 (3)', 'PFAM_A (1)', 'PFAM_A (2)', 'PFAM_A (3)', 'PDB70 (1)', 'PDB70 (2)', 'PDB70 (3)', 'SCOP70 (1)', 'SCOP70 (2)', 'SCOP70 (3)']]
             df_cluster = df_cluster.merge(dfhhblits,on="CLUSTER",how="left")
             df_cluster = df_cluster.fillna("-")
-            file_cluster_results = output_path + basename + "_clusters.tsv"
+            file_cluster_results = os.path.join(output_path, basename + "_clusters.tsv")
             df_cluster.to_csv(file_cluster_results,sep="\t",header=True,index=False)
-            pubmed_file = os.path.dirname(os.path.abspath(__file__)) + "/data/pubmed_cluster.tsv"
+            pubmed_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "pubmed_cluster.tsv")
             dfpubmed = pd.read_table(pubmed_file,sep="\t",header=None,names=["CLUSTER","PUBMED","TITLE","JOURNAL","YEAR"])
             dfpubmed = dfpubmed[dfpubmed['CLUSTER'].isin(df_cluster["CLUSTER"].tolist())]
             dfpubmed = tmp.merge(dfpubmed,on="CLUSTER")
-            file_pubmed_results = output_path + basename + "_articles.tsv"
+            file_pubmed_results = os.path.join(output_path, basename + "_articles.tsv")
             dfpubmed.to_csv(file_pubmed_results,sep="\t",header=True,index=False)
-            go_file = os.path.dirname(os.path.abspath(__file__)) + "/data/GO_information_by_cluster.tsv"
+            go_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "GO_information_by_cluster.tsv")
             dfgo = pd.read_table(go_file,sep="\t",header=0, names=["CLUSTER","TYPE","GO","INFO"],dtype={"CLUSTER":"int64","GO":"str","TYPE":"str","INFO":"str"})
             dfgo = dfgo[dfgo['CLUSTER'].isin(df_cluster["CLUSTER"].tolist())]
             dfgo = tmp.merge(dfgo,on="CLUSTER")
-            file_go_results = output_path + basename + "_go.tsv"
+            file_go_results = os.path.join(output_path, basename + "_go.tsv")
             dfgo.to_csv(file_go_results,sep="\t",header=True,index=False)
             display_line = "Finished! Look in your working directory, the folder named DARK_RESULT"
             return html.Div(display_line)

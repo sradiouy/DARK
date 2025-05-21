@@ -1,32 +1,28 @@
-dash==0.32.1
-dash-bootstrap-components==0.3.2
-dash-core-components==0.38.0
-dash-html-components==0.13.2
-dash-renderer==0.15.0
-dash-table==3.1.6
-Flask==1.0.2
+dash==2.10.2
+dash-bootstrap-components==1.4.1
+Flask==2.2.5
 Flask-Compress==1.4.0
 future==0.17.0
-nltk==3.3
-numpy==1.18
-pandas==1.0.5
+nltk==3.8.1
+numpy==1.23.5
+pandas==1.5.3
 parso==0.3.1
 pexpect==4.6.0
 pickleshare==0.7.5
-Pillow==5.3.0
+Pillow==5.3.0 # Consider updating if issues arise
 plac==0.9.6
-plotly==3.4.1
-pluggy==0.8.0
-preshed==2.0.1
-prompt-toolkit==2.0.7
-psutil==5.4.7
-ptyprocess==0.6.0
-py==1.7.0
-pycodestyle==2.4.0
-pycparser==2.19
-Pygments==2.2.0
-pylint==2.1.1
-pyparsing==2.2.2
-Pypubsub==4.0.0
-pytest==3.9.3
-pytest-socket==0.3.1
+plotly==5.13.0
+pluggy==0.8.0 # pytest plugin, likely okay
+preshed==2.0.1 # spacy related, likely okay
+prompt-toolkit==2.0.7 # ipython related, likely okay
+psutil==5.4.7 # Consider updating
+ptyprocess==0.6.0 # pexpect dep, likely okay
+py==1.7.0 # pytest dep, likely okay
+pycodestyle==2.4.0 # Consider updating
+pycparser==2.19 # cffi dep, likely okay
+Pygments==2.2.0 # ipython dep, likely okay
+pylint==2.1.1 # Consider updating
+pyparsing==2.2.2 # Consider updating
+Pypubsub==4.0.0 # likely okay
+pytest==3.9.3 # Consider updating
+pytest-socket==0.3.1 # likely okay
